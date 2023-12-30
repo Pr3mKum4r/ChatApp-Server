@@ -5,6 +5,7 @@ const app = express();
 const dotenv = require('dotenv');
 import UserRouter from './routes/userRoute';
 import ChatRouter from './routes/chatRoute';
+import MessageRouter from './routes/msgRoute';
 
 dotenv.config();
 app.use(cors());
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 // ROUTES
 app.use('/api/v1/users', UserRouter);
 app.use('/api/v1/chats', ChatRouter);
+app.use('/api/v1/messages', MessageRouter);
 
 app.all('*', (req: Request, res: Response, next: NextFunction) => {
   res.json(`Can't find ${req.originalUrl} on this server!`);
