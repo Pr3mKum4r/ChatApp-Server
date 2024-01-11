@@ -11,7 +11,7 @@ const createToken = (id: number) => {
 }
 
 exports.register = async (req: Request, res: Response) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, preferredLanguage } = req.body;
 
     try {
         let user = await db.user.findUnique({
@@ -31,11 +31,12 @@ exports.register = async (req: Request, res: Response) => {
                 name: name,
                 email: email,
                 password: hasedhPassword,
+                preferredLanguage: preferredLanguage
             },
         });
 
         const token = createToken(user.id);
-        res.status(200).json({id: user.id, name: user.name, email: user.email, token: token});
+        res.status(200).json({id: user.id, name: user.name, email: user.email, token: token, preferredLanguage: user.preferredLanguage});
     } catch (error) {
         res.status(500).json({
             status: 'fail',

@@ -2,13 +2,16 @@ import { Request, Response } from 'express';
 import db from '../db';
 
 exports.createMsg = async (req: Request, res: Response) => {
-    const {chatId, senderId, text} = req.body;
+    const {chatId, senderId, text, originalLanguage, targetLanguage, translatedText} = req.body;
     try{
         const newMsg = await db.message.create({
             data: {
                 chatId: chatId,
                 senderId: senderId,
                 text: text,
+                originalLanguage: originalLanguage,
+                targetLanguage: targetLanguage,
+                translatedText: translatedText,
             },
         });
         res.status(200).json(newMsg);

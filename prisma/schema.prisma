@@ -11,24 +11,27 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  name      String
-  email     String   @unique
-  password  String
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt         DateTime @default(now())
+  name              String
+  email             String   @unique
+  password          String
+  preferredLanguage String
 }
 
 model Chat {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  members    String[]  // An array of member identifiers, modify the type as needed (e.g., String, Int)
-  createdAt  DateTime  @default(now())      // Automatically sets to current date and time when a new record is created
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  members   String[] // An array of member identifiers, modify the type as needed (e.g., String, Int)
+  createdAt DateTime @default(now()) // Automatically sets to current date and time when a new record is created
 }
 
 model Message {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  chatId    String   // Reference to Chat model
-  senderId  String   // Reference to User model, representing the sender of the message
-  text      String   // The content of the message
+  chatId    String // Reference to Chat model
+  senderId  String // Reference to User model, representing the sender of the message
+  text      String // The content of the message
   createdAt DateTime @default(now()) // Automatically sets to current date and time when a new record is created
+  originalLanguage String
+  targetLanguage String
+  translatedText String
 }
-
