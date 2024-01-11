@@ -14,13 +14,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../db"));
 exports.createMsg = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { chatId, senderId, text } = req.body;
+    const { chatId, senderId, text, originalLanguage, targetLanguage, translatedText } = req.body;
     try {
         const newMsg = yield db_1.default.message.create({
             data: {
                 chatId: chatId,
                 senderId: senderId,
                 text: text,
+                originalLanguage: originalLanguage,
+                targetLanguage: targetLanguage,
+                translatedText: translatedText,
             },
         });
         res.status(200).json(newMsg);

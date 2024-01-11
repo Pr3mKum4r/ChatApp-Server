@@ -22,7 +22,7 @@ const createToken = (id) => {
     });
 };
 exports.register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, email, password } = req.body;
+    const { name, email, password, preferredLanguage } = req.body;
     try {
         let user = yield db_1.default.user.findUnique({
             where: {
@@ -44,10 +44,11 @@ exports.register = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 name: name,
                 email: email,
                 password: hasedhPassword,
+                preferredLanguage: preferredLanguage
             },
         });
         const token = createToken(user.id);
-        res.status(200).json({ id: user.id, name: user.name, email: user.email, token: token });
+        res.status(200).json({ id: user.id, name: user.name, email: user.email, token: token, preferredLanguage: user.preferredLanguage });
     }
     catch (error) {
         res.status(500).json({
