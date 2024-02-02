@@ -21,7 +21,7 @@ exports.translate = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const response = yield fetch(`${AZUREENDPOINT}/translate?api-version=3.0&from=${encodeURIComponent(sourceLanguage)}&to=${encodeURIComponent(targetLanguage)}`, {
             method: "POST",
             headers: {
-                "Ocp-Apim-Subscription-Key": AZURESUBSCRIPTIONKEY.toString(),
+                "Ocp-Apim-Subscription-Key": AZURESUBSCRIPTIONKEY || ''.toString(),
                 "Content-type": "application/json",
                 "X-ClientTraceId": (0, uuid_1.v4)().toString()
             },

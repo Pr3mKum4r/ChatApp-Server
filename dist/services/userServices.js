@@ -51,6 +51,7 @@ exports.register = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.status(200).json({ id: user.id, name: user.name, email: user.email, token: token, preferredLanguage: user.preferredLanguage });
     }
     catch (error) {
+        console.log(error);
         res.status(500).json({
             status: 'fail',
             error: error,
@@ -71,7 +72,7 @@ exports.login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!isValidPassword)
             return res.status(400).json({ message: "Invalid email or password" });
         const token = createToken(user.id);
-        res.status(200).json({ id: user.id, name: user.name, email: user.email, token: token });
+        res.status(200).json({ id: user.id, name: user.name, email: user.email, token: token, preferredLanguage: user.preferredLanguage });
     }
     catch (error) {
         res.status(500).json({

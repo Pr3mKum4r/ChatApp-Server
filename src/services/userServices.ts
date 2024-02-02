@@ -38,6 +38,7 @@ exports.register = async (req: Request, res: Response) => {
         const token = createToken(user.id);
         res.status(200).json({id: user.id, name: user.name, email: user.email, token: token, preferredLanguage: user.preferredLanguage});
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             status: 'fail',
             error: error,
@@ -58,7 +59,7 @@ exports.login = async (req: Request, res: Response) => {
         const isValidPassword = await bcrypt.compare(password, user.password);
         if(!isValidPassword) return res.status(400).json({message: "Invalid email or password"});
         const token = createToken(user.id);
-        res.status(200).json({id: user.id, name: user.name, email: user.email, token: token});
+        res.status(200).json({id: user.id, name: user.name, email: user.email, token: token, preferredLanguage: user.preferredLanguage});
     }catch(error){
         res.status(500).json({
             status: 'fail',
